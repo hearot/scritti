@@ -1,0 +1,153 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsopn}
+\usepackage{mathtools}
+
+\title{Spazio vettoriale dei sottoinsiemi}
+\author{Gabriel Antonio Videtta}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\FF}{\mathbb{F}_2}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newtheorem{example}{Esempio}[section]
+\newtheorem{exercise}{Esercizio}[section]
+\newtheorem{theorem}{Teorema}[section]
+
+\setlength\parindent{0pt}
+
+\tableofcontents
+
+\section{Il campo $\FF$ e verifica degli assiomi}
+
+Dato un qualsiasi insieme X\footnote{Non ci soffermiamo sulla definizione di insieme,
+sebbene da tale scelta possano scaturire vari paradossi. Rimandiamo per la risoluzione
+di tali problemi a varie teorie assiomatiche, come quella di Zermelo–Fraenkel.} è possibile
+estrarne uno spazio vettoriale. \\ \\
+Per costruire l'insieme di vettori considereremo gli elementi di X, mentre il campo su cui verrà
+costruito lo spazio sarà $\FF = \{0,1\} \, \cong \, \ZZ/2\ZZ$. Prima di costruire lo spazio,
+assicuriamoci che $\FF$ sia effettivamente un campo\footnote{Non solo è un campo, ma è il più
+piccolo campo non banale, ossia con più di un elemento.} e definiamolo. \\ \\
+Le operazioni $+$ e $\cdot$ di questo campo sono esattamente le stesse impiegate in
+$\ZZ/2\ZZ$ (i.e. in modulo 2, dove $2 \equiv 0$), o equivalentemente vengono definite in questo modo:
+\begin{itemize}
+    \item $+ : \FF \to \FF$ t.c. $0+0=0$, \, $1+0=1$, \, $0+1=1$, \, $1+1=0$ (addizione)
+    \item $\cdot : \FF \to \FF$ t.c. $0\cdot0=0$, \, $1\cdot0=0$, \, $0\cdot1=0$, \, $1\cdot1=1$ (moltiplicazione)
+\end{itemize}
+Gli assiomi di campo sono effettivamente soddisfatti: gli inversi additivi di $0$ e $1$ sono $0$ e $1$ stessi, e $1$ è inverso moltiplicativo di sé stesso. Valgono chiaramente le
+proprietà associative e distributive, mentre gli elementi neutri sono $0$ per l'addizione e
+$1$ per la moltiplicazione.
+Adesso è possibile costruirci sopra uno spazio vettoriale, che d'ora in poi chiameremo
+$\Delta (X)$.
+
+\section{Costruzione dello spazio vettoriale}
+
+Ricordiamo una delle operazioni elementari degli insiemi, la cosiddetta \textit{differenza
+simmetrica} $A \Delta B$. Essa altro non è che l'unione dei due insiemi tolta la loro
+intersezione: \[A \Delta B = \left( A \cup B \right) \setminus \left( A \cap B \right).\]
+Adesso definiamo $\Delta (X) = \{ \alpha_1 x_1 + \alpha_2 x_2 + \ldots + \alpha_n x_n \mid n \in \mathbb{N} \land x_i \in X, \alpha_i \in \FF \; \forall \, i \in \mathbb{N} \mid  1 \leq i \leq n \}$.
+
+\begin{example}
+Se $X = \{a, b\}$, $\Delta (X) = \{0, \, a, \, b, \, a+b\}$.
+\end{example}
+\begin{example}
+Se $X = \{a, b, c\}$, $\Delta (X) = \{0, \, a, \, b, \, c, \, a+b, \, a+c, \, b+c, \, a+b+c\}$.
+\end{example}
+
+Dotiamo lo spazio di due operazioni, dette somma ($+$) e prodotto esterno ($\cdot$):
+
+\begin{itemize}
+    \item $+ : \Delta (X) \to \Delta (X)$ t.c. $\forall \, a, b \in \Delta (X), \, a+b$ sia il risultato della
+    somma coefficiente a coefficiente\footnote{Esattamente come accade nei polinomi, dove
+    la somma di due polinomi è effettuata sommando i coefficienti dei monomi dello stesso
+    grado. L'unica differenza risiede nel ricordarsi che la somma dei coefficienti in $\Delta (X)$ è quella di $\FF$, dove il caso $1+1=0$ ha particolare rilevanza.}.
+    \item $\cdot : \Delta (X) \to \Delta (X)$ t.c. $\forall \, a \in \Delta (X), \, \delta \in \FF, \, \delta a$ sia il risultato del prodotto di $\delta$ con ogni coefficiente di $a$\footnote{Sussiste ancora l'analogia con i polinomi.}.
+\end{itemize}
+
+\begin{example}
+Se $X = \{a, \, b\}$, $a+a=(1+1)a=0$ in $\Delta (X)$, mentre $a+b$ ''rimane'' $a+b$.
+\end{example}
+
+\begin{example}
+Se $X = \{a, \, b\}$, $1\cdot a=a$ in $\Delta (X)$, mentre $0 \cdot a = 0$.
+\end{example}
+
+Queste operazioni verificano facilmente gli assiomi dello spazio vettoriale, pertanto $\Delta (X)$ è uno spazio vettoriale, la cui base è $X$ stesso\footnote{Ogni elemento di $\Delta (X)$ è infatti combinazione lineare univoca degli elementi di $X$ -- ancora una volta, come accade nei polinomi.}. \\
+
+Pertanto $\dim \Delta (X) = |X|$, se $|X| < \infty$, altrimenti $\dim \Delta (X) = \infty$. \\
+
+L'interpretazione (e l'utilità) di questo spazio è facilmente spiegata: ogni elemento di
+$\Delta (X)$ definisce in modo univoco un sottoinsieme di $X$ e l'operazione definita
+altro non è che la differenza simmetrica $A \Delta B$ ricordata all'inizio della sezione. \\
+
+In altri termini, dotando dell'insieme delle parti (i.e. dei sottoinsiemi) di $X$, detto
+$\wp(X)$, dell'operazione differenza simmetrica per l'addizione e dell'operazione esistenza\footnote{$1 \cdot X = X$, $0 \cdot X = \varnothing$.} per il prodotto esterno, si può verificare che questo costituisce
+uno spazio vettoriale su $\FF$ isomorfo a $\Delta (X)$ nel caso in cui $X$ sia un insieme finito\footnote{L'isomorfismo impiegato nella dimostrazione difatti non è definito per i sottoinsiemi infiniti -- dopotutto, se $|X| = \infty$, $\Delta (X)$ è un insieme numerabile, mentre $\wp(X)$ non può esserlo.}.
+
+\begin{theorem}
+$|X| < \infty \Rightarrow \wp(X) \cong \Delta (X)$
+\end{theorem}
+
+\begin{proof}
+Per dimostrare che i due spazi sono isomorfi si costruisce un'applicazione lineare
+bigettiva. Definiamo pertanto $\phi : \wp(X) \to \Delta (X)$ in modo tale che:
+
+\[\phi(\{a_1, \, \ldots, \, a_n\}) = a_1 + \ldots + a_n\]
+
+Dimostriamo che $\phi$ è un'applicazione lineare, dimostrandone prima la linearità e poi
+l'omogeneità. \\
+
+Verifichiamo la linearità:
+\[\begin{split}
+&\phi (\{a_1, \, \ldots, \, a_n, \, b_{n+1}, \, \ldots, \, b_m \} \Delta \{a_1, \, \ldots, \, a_n, \, c_{n+1}, \, \ldots, \, c_k \}) = \\
+&\;\;\;= \phi (\{ b_{n+1}, \, \ldots, \, b_m, \, c_{n+1}, \, \ldots, \, c_k \}) = \\
+&\;\;\;= b_{n+1} + \ldots + b_m + \ldots + c_{n+1} + \ldots + c_k = \\
+&\;\;\;= (a_1 + \ldots + b_{n+1} + \ldots + b_m) + (a_1 + \ldots + c_{n+1} + \ldots + c_k) = \\
+&\;\;\;= \phi (\{a_1, \, \ldots, \, a_n, \, b_{n+1}, \ldots, \, b_m \}) + \phi (\{a_1, \, \ldots, \, a_n, \, c_{n+1}, \ldots, \, c_k \}).
+\end{split}\]
+
+E l'omogeneità con $1$:
+\[\phi (1 \cdot \{a_1, \, \ldots, \, a_n \}) = \phi (\{a_1, \, \ldots, \, a_n \}) =  1 \cdot \phi (\{a_1, \, \ldots, \, a_n \}).\]
+
+Ed infine con $0$:
+
+\[\phi (0 \cdot \{a_1, \, \ldots, \, a_n \}) = \phi (\varnothing) = 0 = 0 \cdot \phi (\{a_1, \, \ldots, \, a_n \}).\]
+
+Questa applicazione è iniettiva, dal momento che $\operatorname{Ker}\phi = \{\varnothing\}$.
+Inoltre $\phi$ è surgettiva, dal momento che una controimmagine di un elemento $d$ di $\Delta (X)$ è l'insieme delle parti letterali di $d$. \\
+
+Poiché bigettiva, tale applicazione è un isomorfismo.
+
+\end{proof}
+
+\section{Note ed esercizi}
+
+In realtà, è possibile costruire un'infinità di spazi su $X$ mantenendo le stesse operazioni, ma variando il campo su cui esso
+è costruito. Un caso speciale, che merita una
+menzione onorevole, è proprio $X = \{1, \, x, \, x^2, \, \ldots\}$ costruito su $\mathbb{R}$ (o un qualsiasi
+$\mathbb{K}$ campo), che dà vita allo spazio dei polinomi, detto $\mathbb{R}[x]$ (o
+$\mathbb{K}[x]$).
+
+\begin{exercise}
+Si esibisca un controesempio per la dimostrazione dell'isomorfismo nel caso infinito.
+\end{exercise}
+
+\begin{exercise}
+Si dimostri che, se $X$ è finito, anche $\{ x_1, \, x_1+x_2, \, \ldots, \, \sum_{i=1}^{|X|} x_i \}$ con $x_i$ elementi distinti
+di $X$ è una base di $\Delta (X)$.
+\end{exercise}
+
+\begin{exercise}
+Dopo aver mostrato che $\{ 1, \, x, \, x^2 \, , \, \ldots\}$ è una base di $\mathbb{R}[x]$\footnote{Questa particolare base è detta \textit{base standard} di $\mathbb{R}[x]$.},
+si dimostri che anche $\{ \sum_{i=0}^{j} x^i \mid j \in \mathbb{N}, \, j \geq 0 \}$, con $x^0 = 1$, lo è.
+\end{exercise}
+
+\end{document}

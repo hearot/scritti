@@ -1,0 +1,231 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsopn}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\newcommand{\dual}[1]{#1^{*}}
+
+\title{$V$ e $\dual V$ a confronto}
+\author{Gabriel Antonio Videtta}
+\date{\today}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Imm}{Im}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\FF}{\mathbb{F}_2}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\LL}[2]{\mathcal{L} \left(#1, \, #2\right)}
+
+\newcommand{\MM}[2]{\mathcal{M}_{#1 \times #2}\left(\KK\right)}
+\newcommand{\M}[1]{\mathcal{M}_{#1}\left(\KK\right)}
+\newcommand{\Mbb}[3]{\mathcal{M}^{#1}_{#2} \left( #3 \right)}
+\newcommand{\Mb}[2]{\mathcal{M}^{#1}_{#2}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\renewcommand{\vec}[1]{\underline{#1}}
+
+\newtheorem{example}{Esempio}[section]
+\newtheorem{exercise}{Esercizio}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}{Proposizione}[section]
+\newtheorem{corollary}{Corollario}[section]
+
+\tableofcontents
+
+\section{Premessa e motivazione}
+
+Lo studio delle applicazioni lineari è riconosciuto come uno
+degli aspetti fondamentali della geometria contemporanea. Non è
+infatti una mera coincidenza che nella maggior parte delle
+applicazioni impiegate nello studio dei sistemi lineari si
+riconoscano proprietà che sono proprie delle applicazioni lineari. \\
+
+Uno dei primi esempi importanti di applicazione lineare è
+quello della funzione traccia $\tr : \M{n} \to \KK$, che
+associa a una matrice quadrata la somma degli elementi della
+diagonale principale. Un altro esempio è quello del determinante
+$\det : \left(\KK^{n}\right)^n \to \KK$, un'applicazione che generalizza
+il concetto di linearità a più argomenti. Si parla infatti in
+questo caso di un'applicazione multilineare. \\
+
+In ogni caso, queste due importanti applicazioni sono
+accomunate dallo spazio di arrivo, il campo $\KK$, sul
+quale si fonda lo spazio di partenza. Per approfondire lo
+studio di questo tipo di applicazioni, si introduce
+pertanto il concetto di \textbf{spazio duale}.
+
+\section{Lo spazio duale e le sue proprietà}
+
+\begin{definition}
+Si dice \textbf{spazio duale} di uno spazio vettoriale $V$
+lo spazio delle applicazioni lineari $\LL{V}{\KK}$, indicato con $\dual V$.
+\end{definition}
+
+\subsection{Il caso finito}
+
+Prima di dedurre la dimensione e una base ``naturale'' di
+$\dual V$, introduciamo il seguente teorema, che mette
+in correlazione due spazi apparentemente scollegati.
+
+\vskip 10pt
+
+\begin{theorem} Siano $V$ e $W$ due spazi vettoriali di dimensione finita su $\KK$, e siano $\dim V = n \in \NN$, $\dim W = m \in \NN$. Allora $\LL{V}{W} \cong \MM{m}{n}$.
+\label{isom}
+\end{theorem}
+
+\begin{proof}
+Siano $\BB = \left(\vec v_1, \, \dots, \, \vec v_n\right)$ e
+$\BB' = \left(\vec w_1, \, \dots, \, \vec w_m\right)$ 
+basi ordinate rispettivamente di $V$ e di $W$. \\
+
+Si considera l'applicazione lineare
+$\Mb{\BB}{\BB'} : \LL{V}{W} \to \MM{m}{n}$, che
+associa ad ogni applicazione lineare la sua matrice di
+cambiamento di base. \\
+
+Tale applicazione è iniettiva, dal momento che l'unica
+applicazione a cui è associata la matrice nulla è l'applicazione
+che associa ad ogni vettore lo zero di $W$. \\
+
+Inoltre, $\Mb{\BB}{\BB'}$ è surgettiva, poiché data una
+matrice $\mathbf{m} \in \MM{m}{n}$ si può costruire l'applicazione
+$\phi : V \to W$ t.c. $\left[ \phi \left( v_i \right) \right]_{\BB'} = \mathbf{m}^i \; \forall \, i \in \NN \mid 1 \leq i \leq n$. \\
+
+Dal momento che $\Mb{\BB}{\BB'}$ è sia iniettiva che
+surgettiva, tale applicazione è bigettiva, e quindi
+un isomorfismo.
+\end{proof}
+
+\vskip 10pt
+
+\begin{corollary}
+Sia $V$ uno spazio vettoriale di dimensione finita su $\KK$.
+Allora $\dim V = \dim \dual V$.
+\label{isom2}
+\end{corollary}
+
+\begin{proof}
+Dal \textit{Teorema \ref{isom}} si deduce che
+$\dim \dual V = \dim \LL{V}{\KK} = \dim \KK \cdot \dim V =
+\dim V$.
+\end{proof}
+
+\vskip 10pt
+
+\begin{corollary}
+Sia $V$ uno spazio vettoriale di dimensione finita su $\KK$.
+Allora $V \cong \dual V$.
+\label{isom3}
+\end{corollary}
+
+\begin{proof}
+Poiché $V$ è di dimensione finita, la dimostrazione segue dal
+\textit{Corollario \ref{isom2}}, dal momento che
+$\dim V = \dim \dual V \iff V \cong \dual V$.
+\end{proof}
+
+\begin{proof}[Dimostrazione alternativa.]
+Sia $\dim V = n \in N$ e sia $\BB = \left(\vec v_1, \, \dots, \, \vec v_n\right)$ una base ordinata di $V$. \\
+
+Si costruisce un'applicazione $\phi : V \to \dual V$ che,
+detto $\vec v = \sum_{i=0}^{n} \alpha_i \, \vec v_i$ con
+$\alpha_i \in \KK \; \forall \, i \in \NN \mid 1 \leq i \leq n$, sia tale che:
+
+\[\phi(\vec v) = \sum_{i=0}^{n} \alpha_i \, \vec v_i^{*}\]
+
+con $\vec v_i^{*}$ costruito nel seguente modo\footnote{Si sarebbe potuto
+semplificare la grafia introducendo la notazione del \textit{delta di Dirac}, ossia $\delta_{ij}$. Si è
+tuttavia preferito esplicitare la definizione del funzionale.}:
+
+\[\vec v_{i}^*\left(\vec v_j\right) = \begin{cases}1 & \text{se } i = j \\ 0 & \text{altrimenti} \end{cases}\]
+
+L'applicazione $\phi$ è chiaramente lineare. Poiché i vari
+$\vec v_i^{*}$ sono linearmente indipendenti, segue che
+$\Ker \phi = \{\vec 0\}$, e quindi che $\phi$ è iniettiva. \\
+
+Sia $\xi \in \dual V$. Allora $\xi \left( \vec v \right) =
+\sum_{i=1}^{n} \alpha_i \, \xi(\vec v_i) =
+\sum_{i=1}^{n} \vec v_i^{*} \left( \vec v \right) \xi(\vec v_i) \, $. Quindi $\xi = \sum_{i=1}^n \xi(\vec v_i) \, \vec v_i^{*}$.
+Detto $\vec u = \sum_{i=1}^n \xi \left( \vec v_i \right) \vec v_i$, si verifica che $\phi \left( \vec u \right) = \xi$.
+Pertanto $\phi$ è surgettiva\footnote{Alternativamente, per il teorema del rango, $\dim V$ = $\dim \Imm \phi + \underbrace{\dim \Ker \phi}_{=\,0} = \dim \Imm \phi \implies \dim \Imm \phi = \dim V = \dim \dual V \implies \Imm \phi = \dual V$, ossia che $\phi$ è surgettiva.}. \\
+
+Poiché iniettiva e surgettiva, $\phi$ è bigettiva, e pertanto
+un isomorfismo.
+
+\end{proof}
+
+\vskip 10pt
+
+\begin{corollary} Sia $V$ uno spazio vettoriale di dimensione
+finita su $\KK$, con $\dim V = n \in \NN$.
+L'insieme $\dual \BB = \left( \vec v_i^{*} \right)_{i=1\to n}$ è una base di $\dual V$.
+\end{corollary}
+
+\begin{proof}
+Dal \textit{Corollario \ref{isom3}} si desume che la dimensione
+di $\dual V$ è esattamente $n$. Poiché $\dual \BB$ è un insieme
+linearmente indipendente di $n$ elementi, si conclude
+che è una base di $\dual V$.
+\end{proof}
+
+\subsection{Il caso infinito}
+
+Le dimostrazioni presentate precdentemente non prendono in considerazione
+il caso degli spazi vettoriali di dimensione infinita;
+ciononostante vale in particolare un risultato correlato:
+
+\vskip 10pt
+
+\begin{theorem} Sia $V$ uno spazio vettoriale su $\KK$.
+$\dim V = \infty \iff \dim \dual V = \infty$\footnote{Ciò
+tuttavia non implica che $V$ e $\dual V$ siano equipotenti se di dimensione infinita; al contrario, $| \dual V | > |V|$.}.
+\end{theorem}
+
+\begin{proof}
+Se $\dual V$ è di dimensione infinita, anche $V$ deve esserlo
+necessariamente, altrimenti, per il \textit{Teorema \ref{isom}}
+dovrebbe esserlo anche $\dual V$. \\
+
+Sia allora $V$ di dimensione infinita e sia $A_i$ una famiglia
+di indici che enumeri $i$ elementi della base di $V$.
+
+Si consideri l'insieme linearmente indipendente $I_n = \{\vec v_{\alpha}^* \}_{\alpha \in A_n}$ con\footnote{Ancora una volta
+questa definizione ricalca il delta di Dirac.}:
+
+\[\vec v_{\alpha}^*\left(\vec v_{\beta}\right) = \begin{cases}1 & \text{se } \alpha = \beta \\ 0 & \text{altrimenti} \end{cases}\]
+
+Si assuma l'esistenza di una base $\BB$ di $\dual V$ di
+cardinalità finita, e sia $| \BB | = n \in \NN$. Ogni insieme $P \subset V$ linearmente indipendente è t.c. $|P| \leq n$.
+Tuttavia $|I_{n+1}|=n+1>n$, \Lightning.
+
+\end{proof}
+
+\section{Esercizi}
+
+\begin{exercise}
+Si dimostri che l'insieme $I_n$ è linearmente indipendente in $\dual V$, dato $V$ spazio vettoriale di dimensione infinita.
+\end{exercise}
+
+\begin{exercise}
+Dato $V$ uno spazio vettoriale di dimensione finita, si esibisca
+una base per $\dual {\left( \dual V \right)} = \LL{\LL{V}{ \KK}}{\KK}$, il cosiddetto \textbf{spazio biduale}.
+\end{exercise}
+
+\end{document}
