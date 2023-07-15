@@ -2,7 +2,7 @@
 
 Questo repository raccoglie tutti gli articoletti e tutti i notebook che ho scritto. Ogni cartella racchiude una materia differente, e a sua volta ogni materia è divisa in due sezioni, una dedicata agli scritti in [LaTeX](https://www.latex-project.org/) e una dedicata ai notebook creati su [SageMath](https://www.sagemath.org/).
 
-Sicuramente questi scritti non sono perfetti, e potrebbero dunque contenere alcuni errori. Nell'eventualità in cui vogliate segnalarmeli, potete farlo scrivendomi a g.videtta1@studenti.unipi.it, o aprendo un issue su questo repository.
+Sicuramente questi scritti non sono perfetti, e potrebbero dunque contenere alcuni errori. Nell'eventualità in cui vogliate segnalarmeli, potete farlo scrivendomi a [g.videtta1@studenti.unipi.it](mailto:g.videtta1@studenti.unipi.it), o aprendo un issue su questo repository.
 
 Riguardo la licenza con cui pubblico questi scritti, vale la stessa premessa che ho fatto per [i miei appunti](https://notes.hearot.it).
 
