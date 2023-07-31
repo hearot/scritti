@@ -1,0 +1,137 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{notes_2023}
+
+\begin{document}
+	\title{Corollari di aritmetica modulare}
+	\date{\today}
+	\maketitle
+	
+	In questo breve documento dimostro ognuno
+	dei seguenti teoremi di teoria dei numeri:
+	
+	\begin{enumerate}[(i)]
+		\item il teorema di Wilson,
+		\item il teorema di Wolstenholme,
+		\item il teorema di Lagrange (per i polinomi).
+	\end{enumerate}
+	
+	Questi teoremi si dimostrano facilmente anche senza l'uso dei risultati
+	principali della teoria dei gruppi e degli anelli. Tuttavia, la
+	loro vera natura è prettamente dovuta allo studio di queste due
+	teorie -- come si evince dalla brevità e dall'immediatezza delle
+	dimostrazioni. \bigskip
+	
+	
+	
+	Il prerequisito fondamentale per approcciare questi tre teoremi
+	è l'aver studiato il teorema di Lagrange di teoria dei gruppi
+	(quantomeno per dimostrare i primi due teoremi)\footnote{
+		Oppure il suo più semplice corollario, il piccolo teorema di Fermat.
+	} e avere familiarità con gli anelli euclidei (per dimostrare
+	il teorema di Lagrange). \bigskip
+	
+	
+	Si presenta innanzitutto il seguente lemma:
+
+	\begin{lemma}
+		Sia $p$ un numero primo.
+		Sia $q \in \ZZ[x]$ il polinomio tale per cui:
+		\[
+			q(x) = (x-1)(x-2)\cdots(x-(p-1)).
+		\]
+		Allora, se
+		\[
+			q(x) = x^{p-1} + a_{p-2} x^{p-2} + \ldots + a_1 x + a_0, \qquad a_i \in \ZZ,\;0 \leq i \leq p-1,
+		\]
+		vale che $\hat q(x) = x^{p-1} -1$, dove $\hat q$ è la proiezione in $\ZZ \quot p\ZZ$ di $q$.
+	\end{lemma}
+	
+	\begin{proof}
+		Per il teorema di Lagrange, vale che
+		$x^{p-1} - 1 \equiv 0 \pod p$ per ogni $x \in \ZZ \quot p\ZZ^*$, dal momento che
+		$\ZZ \quot p\ZZ^*$ è un gruppo moltiplicativo di ordine $p-1$.
+		Pertanto $\hat q$ e $x^{p-1} - 1$ hanno le stesse radici e
+		lo stesso grado, e sono dunque lo stesso polinomio, da cui la tesi.
+	\end{proof}
+	
+	\begin{theorem}[di Wilson]
+		Sia $p \in \NN^+$. Allora $(p-1)! \equiv -1 \pod p$ se e solo se $p$ è primo.
+	\end{theorem}
+	
+	\begin{proof}
+		Se $(p-1)! \equiv -1 \pod p$, allora ogni elemento di $\ZZ \quot p \ZZ$ è
+		invertibile, e quindi $\ZZ \quot p \ZZ$ sarebbe un campo; ciò è possibile
+		se e solo se $p$ è primo\footnote{
+			Infatti un campo è prima di tutto un dominio. Se $p$ non fosse
+			primo, $\ZZ \quot p \ZZ$ ammetterebbe divisori di zero.
+		}. Se $p$ è primo, per il \textit{Lemma 1}, $\hat q(x) = x^{p-1} - 1$, e quindi
+		$p$ divide ogni $a_i$. Si
+		osserva allora che $a_0 = (-1)^{p-1} (p-1)!$ e che deve dunque valere:
+		\[ (-1)^{p-1} (p-1)! \equiv -1 \pod p. \]
+		Sia che $p$ sia uguale a $2$, sia che $p$ sia dispari, l'ultima equazione
+		implica che:
+		\[ (p-1)! \equiv -1 \pod p, \]
+		da cui la tesi.
+ 	\end{proof}
+ 	
+ 	\begin{theorem}[di Wolstenholme]
+ 		Sia $p \geq 5$ un numero primo. Allora il numeratore di:
+ 		\[
+ 			S = 1 + \frac{1}{2} + \ldots + \frac{1}{p-1}
+ 		\]
+ 		è divisibile per $p^2$.
+ 	\end{theorem}
+ 	
+ 	\begin{proof}
+ 		Per il \textit{Lemma 1}, $p$ divide ogni $a_i$ di $q$. Si osserva
+ 		inoltre che $a_1$ è esattamente il numeratore di $S$. \medskip
+ 
+
+ 		Si computa $q$ in $p$:
+ 		\[ 
+ 			q(p) = p^{p-1} + a_{p-2} p^{p-2} + \ldots + a_1 p + a_0.
+ 		\]
+ 		Analogamente:
+ 		\[
+ 			q(p) = (p-1)(p-2) \cdots (p-(p-1)) = (p-1)! = (-1)^{p-1} a_0 = a_0,
+ 		\]
+ 		dove si è usato che $p \geq 5$ è dispari. Quindi
+ 		vale che:
+ 		\[
+ 			p^{p-1} + a_{p-2} p^{p-2} + \ldots + a_1 p = 0,
+ 		\]
+ 		da cui:
+ 		\[
+ 			a_1 p = -(p^{p-1} + \ldots + a_2 p^2).
+ 		\]
+ 		Poiché $p > 3$, $p^3$ divide il secondo membro dell'equazione, e quindi
+ 		$p^2$ divide $a_1$, da cui la tesi.
+ 	\end{proof}
+ 	
+ 	\begin{theorem}[di Lagrange, per i polinomi]
+ 		Sia $q$ un polinomio in $\ZZ[x]$ e sia $p$ un numero primo.
+ 		Allora vale una delle seguenti due affermazioni:
+ 
+ 		\begin{itemize}
+ 			\item $p$ divide ogni coefficiente di $q$,
+ 			\item esistono al più $\deg q$ soluzioni incongruenti\footnote{
+ 				Due soluzioni $x$, $y \in \ZZ$ si dicono incongruenti se
+ 				$x \not\equiv y \pod p$.
+ 			} di $q$ in
+ 				$\ZZ \quot p \ZZ$.
+ 		\end{itemize}
+ 	\end{theorem}
+ 	
+ 	\begin{proof}
+ 		Si consideri la proiezione in $\ZZ \quot p \ZZ$ di $q$, indicata
+ 		con $\hat q$. Poiché $p$ è primo, $\ZZ \quot p \ZZ$ è un campo,
+ 		e quindi $\ZZ \quot p \ZZ[x]$ è un anello euclideo. Pertanto,
+ 		se $\hat q$ è diverso da $0$, $\hat q$ ammette al più
+ 		$\deg \hat q$ soluzioni in $\ZZ \quot p \ZZ$. In particolare
+ 		vale che $\deg \hat q \leq \deg q$, e quindi $\hat q$ ammette al
+ 		più $\deg q$ soluzioni in $\ZZ \quot p \ZZ$ (e quindi esistono al più
+ 		$\deg q$ classi di resto che sono soluzione in $\ZZ \quot p \ZZ$). Se
+ 		invece $\hat q = 0$, $p$ deve dividere obbligatoriamente
+ 		ogni coefficiente di $q$, da cui la tesi.
+ 	\end{proof}
+\end{document}
