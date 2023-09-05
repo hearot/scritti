@@ -1,0 +1,324 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{notes_2023}
+
+\begin{document}
+	\title{Il teorema di struttura dei moduli finitamente generati su un PID}
+	\date{\today}
+	\maketitle
+	
+	In questo documento dimostro\footnote{
+		Il contenuto di questo documento è ispirato a quello
+		del capitolo \textit{The PID structure theorem} del
+		\textit{Napkin} di Evan Chen, reperibile su
+		\url{https://github.com/vEnhance/napkin}.	
+	} un enunciato fondamentale del celebre teorema
+	di struttura dei moduli finitamente generati su un PID.
+	Storicamente questo teorema nasce come una generalizzazione
+	del teorema di struttura dei gruppi abeliani finitamente generati e diventa
+	poi un potente strumento da cui derivano alcune celebri forme canoniche
+	dell'algebra lineare, come la forma normale di Jordan o la forma
+	canonica razionale.
+	
+	\begin{theorem}[di struttura dei moduli finitamente generati su un PID]
+		Sia $M$ un modulo finitamente generato su un PID $R$. Allora
+		esistono unici (a meno di associati) $d_1$, ..., $d_k \in R$
+		tali per cui $d_1 \mid d_2 \mid \cdots \mid d_k$ e
+		$M \cong R/(d_1) \times \cdots \times R/(d_k)$.
+	\end{theorem}
+
+	Si osserva sin da subito che il teorema può riscriversi in modo alternativo
+	utilizzando il teorema cinese del resto. Infatti, se $d_i$ viene
+	scritto nella sua fattorizzazione in primi\footnote{
+		Un PID è sempre un UFD e dunque una tale fattorizzazione esiste sempre.
+	} $p_1^{k_1} \cdots p_{n_i}^{k_{n_i}}$, allora vale che:
+	\[
+		R/(d_i) \cong R/\!\left(p_1^{k_1}\right) \times \cdots \times R/\bigl(p_{n_i}^{k_{n_i}}\bigr).
+	\]
+	Pertanto il teorema di struttura può riscriversi come:
+	
+	\begin{theorem}
+		Sia $M$ un modulo finitamente generato su un PID $R$. Allora
+		esistono unici (a meno di associati) $p_1$, ..., $p_n \in R$ primi
+		e $k_1$, ..., $k_n \in \NN$ tali per cui:
+		\[
+			M \cong R/\bigl(p_1^{k_1}\bigr) \times \cdots \times R/\bigl(p_n^{k_n}\bigr).
+		\]
+	\end{theorem}
+	
+	\begin{remark}
+		D'ora in poi, mi riferisco ad $M$ come un modulo finitamente generato
+		su un PID $R$. 
+	\end{remark}
+	
+	La forma del primo enunciato è detta \textbf{decomposizione in fattori invarianti},
+	mentre quella del secondo è detta \textbf{decomposizione primaria}.
+
+	\begin{definition}[fattori invarianti]
+		Si chiamano \textbf{fattori invarianti} i vari $d_i$ che compaiono
+		nella decomposizione in fattori invarianti di $M$.
+	\end{definition}
+
+	\begin{definition}[divisori elementari]
+		Si chiamano \textbf{divisori elementari} i vari $p_i^{k_i}$ che
+		compaiono nella decomposizione primaria di $M$.
+	\end{definition}
+
+	\begin{definition}[rango di un modulo]
+		Si definisce rango di $M$ il numero di volte in cui compare $0$
+		tra i fattori invarianti.
+	\end{definition}
+	
+	Il documento prosegue con la dimostrazione dell'esistenza\footnote{
+		La dimostrazione dell'unicità è omessa. Alcuni commenti e risultati al
+		riguardo sono reperibili su \url{https://math.stackexchange.com/q/4193/769611}.
+	} dei fattori
+	invarianti, secondo il seguente schema:
+	
+	\begin{itemize}
+		\item Poiché $M$ è finitamente generato, esiste un'applicazione lineare
+			surgettiva $\psi$ da $R^m$ a $M$, dove $m$ è il numero di generatori di $M$,
+		\item Poiché $R$ è noetheriano\footnote{
+			Un modulo è noetheriano se ogni suo sottomodulo è finitamente
+			generato.
+		}, anche $R^m$ lo è; allora
+			$\Ker \psi$ è finitamente generato da $n$ elementi,
+		\item Si può costruire allora un'altra applicazione lineare surgettiva $\phi$ da
+			$R^n$ a $\Ker \psi$,
+		\item Immergendo naturalmente $\Ker \psi$ in $M$ tramite la mappa naturale
+			$\tau$, si osserva che $\Ker \psi = \Im(\tau \circ \phi)$,
+			dove $T = \tau \circ \phi$ è una mappa da $R^n$ a $R^m$,
+		\item Dal momento che $T$ mappa un modulo libero\footnote{
+				Un modulo è libero se ammette una base, proprio come $R^n$.
+			} ad un altro, $T$ può identificarsi con una matrice,
+		\item Si scrive la matrice di $T$ nella forma normale di Smith, dove compaiono
+			i fattori invarianti $d_1$, ..., $d_k$; allora esistono
+			$\vv 1$, ..., $\vv n$ base di $R^n$ tale per cui
+			$R^n = \langle \vv 1 \rangle \oplus \cdots \oplus \langle \vv n \rangle$ e
+			$\Im T = \langle d_1 \vv 1 \rangle \oplus \cdots \oplus \langle d_k \vv k \rangle \oplus \langle 0 \vv{k+1} \rangle \oplus \cdots \oplus \langle 0 \vv n \rangle$,
+		\item Si costruisce un applicazione lineare $\iota$ da $R^n$ a
+			$R/(d_1) \times \cdots \times R/(d_k) \times R \times \cdots \times R$ tale per cui
+			$\Ker \iota = \Im T$; allora, per il primo teorema di isomorfismo,
+			vale che:
+			\[ M \cong R^n/\Ker \psi = R^n/\Im T \cong R/(d_1) \times \cdots \times R/(d_k)  \times R \times \cdots \times R, \]
+			concludendo la dimostrazione.
+	\end{itemize}
+	
+	Questo schema è in parte riassunto dal seguente diagramma commutativo:
+	\[\begin{tikzcd}
+		& {\Ker \psi} \\
+		{R^n} && {R^m} & M
+		\arrow["\phi", two heads, from=2-1, to=1-2]
+		\arrow["\tau", tail, from=1-2, to=2-3]
+		\arrow["\psi", two heads, from=2-3, to=2-4]
+		\arrow["T", from=2-1, to=2-3]
+	\end{tikzcd}\]
+	
+	\section*{Dimostrazione}
+	
+	Dal momento che $M$ è finitamente generato, esistono $\ww 1$, ...,
+	$\ww m \in M$ tali per cui $\langle \ww 1, \ldots, \ww m  \rangle = M$.
+	Allora si costruisce l'applicazione lineare $\psi : R^m \to M$ univocamente
+	determinata dalla relazione $\e i \xmapsto{\psi} \ww i$. Si osserva che
+	$\psi$ è surgettiva: per ogni $\w \in M$, esistono $\alpha_1$, ..., $\alpha_m \in R$
+	tali per cui $\w = \alpha_1 \ww 1 + \ldots + \alpha_m \ww m$; allora
+	$(\alpha_1, \ldots, \alpha_m)^\top \xmapsto{\psi} \w$. \medskip
+
+	Poiché $\psi$ è surgettiva, $\Im \psi = M$, e quindi per il primo teorema
+	di isomorfismo vale che:
+
+	\begin{equation}
+		\label{eq:primo_isomorfismo}
+		M \cong R^m/ \Ker \psi.
+	\end{equation} \vskip 0.1in
+
+	Dal momento che $R$ è un PID, $R$ è in particolare noetheriano (è infatti
+	monogenerato). Allora anche $R^m$ è noetheriano, come dimostra il seguente lemma\footnote{
+		Si costruisce infatti $R^m$ come il prodotto di $R$ effettuato $m$ volte.
+	}:
+	
+	\begin{lemma}
+		Siano $M$ ed $N$ due $R$-moduli noetheriani. Allora $M \times N$ è
+		anch'esso noetheriano.
+	\end{lemma}
+	
+	\begin{proof}
+		Sia $L$ un sottomodulo di $M \times N$. Si considerino i seguenti
+		sottomoduli:
+		\[ A = \{ \vec m \in M \mid (\vec m, \vec 0) \in L \} \subseteq M,\]
+		\[ B = \{ \vec n \in N \mid \exists \vec m \in M \mid (\vec m, \vec n) \in L \} \subseteq N.\]
+		Si osserva che $A$ e $B$ sono finitamente generati, essendo rispettivamente
+		sottomoduli degli anelli noetheriani $M$ ed $N$. Allora esistono
+		$\vec{a_1}$, ..., $\vec{a_s} \in A$ e $\vec{b_1}$, ..., $\vec{b_t} \in B$ tali per cui
+		$A = \langle \vec{a_1}, \ldots, \vec{a_s} \rangle$ e $B = \langle \vec{b_1}, \ldots, \vec{b_t} \rangle$. 
+		\bigskip
+		
+		
+		Sia $\vec \ell \in L$. Allora esistono $\vec m \in M$, $\vec n \in N$ tali per cui
+		$\vec \ell = (\vec m, \vec n)$. Inoltre $\vec n \in B$, e dunque esistono $\beta_1$, ..., $\beta_t$
+		tali per cui $\vec n = \beta_1 \vec{b_1} + \ldots + \beta_t \vec{b_t}$.
+		Siano $\vec{x_1}$, ..., $\vec{x_s} \in M$ tali per cui
+		$(\vec{x_i}), \vec{b_i}) \in L$ e si ponga
+		$\vec x = \beta_1 \vec{x_1} + \ldots + \beta_t \vec{x_t}$.
+		Si ottiene dunque che:
+		\[
+			(\vec m, \vec n) = \underbrace{(\vec m - \vec x, \vec 0)}_{\in L} + \beta_1 (\vec{x_1}, \vec{b_1}) + \ldots + \beta_t (\vec{x_t}, \vec{b_t}).
+		\]
+		Allora $\vec{m'} := \vec m - \vec x \in A$, e dunque esistono $\alpha_1$, ..., $\alpha_s$
+		tali per cui $\vec{m'} = \alpha_1 \vec{a_1} + \ldots + \alpha_s \vec{a_s}$.
+		Pertanto vale che:
+		\[
+			(\vec m, \vec n) = \sum_{i=1}^s \alpha_i (\vec{a_i}, \vec 0) + \sum_{j=1}^t \beta_j (\vec{x_j}, \vec{b_j}),
+		\]
+		da cui si conclude che $L$ è finitamente generato, e dunque che $M \times N$
+		è noetheriano.
+	\end{proof}
+	
+	Poiché allora $R^m$ è noetheriano, $\Ker \psi$ è finitamente generato, e dunque
+	esistono $\uu 1$, ..., $\uu n \in \Ker \psi$ tali per cui
+	$\Ker \psi = \langle \uu 1, \ldots, \uu n \rangle$. Allora, analogamente
+	a prima, si può costruire un'applicazione lineare $\phi : R^n \to \Ker \psi$ tale
+	per cui $\phi$ sia surgettiva, mappando $\e i$ a $\uu i$. \bigskip
+	
+	
+	Si considera adesso l'immersione naturale $\tau$ di $\Ker \psi$ in $R^m$,
+	ossia l'applicazione lineare $\tau : \Ker \psi \to R^m$ tale per cui
+	$\tau(\U) = \U$ per ogni $\U \in \Ker \psi$. Chiaramente $\tau$ è
+	iniettiva e $\Im \tau = \Ker \psi$. Detta allora $T = \tau \circ \phi$,
+	vale che $\Im T = \Im (\tau \circ \phi) = \Im \tau = \Ker \psi$, dove
+	si è usata la surgettività della mappa $\phi$. Sostituendo allora
+	$\Im \tau$ nell'identità \eqref{eq:primo_isomorfismo}, si ottiene che:
+
+	\begin{equation}
+		\label{eq:isomorfismo_M_T}
+		M \cong R^m/\Im T.
+	\end{equation} \vskip 0.1in
+	
+	Pertanto adesso è sufficiente studiare l'applicazione $T$ per ricavare
+	la tesi. Dal momento che $T$ ha come dominio il modulo libero $R^n$ e come codominio
+	$R^m$, $T$ si può rappresentare come una matrice $S$ a elementi in $R$
+	dove $S^j$ è la valutazione in $\e j$ di $T$. Adesso il punto cruciale
+	della dimostrazione dipende dalla seguente proposizione:
+	
+	\begin{proposition}[forma normale di Smith]
+		Sia $S = (s_{ij})$ una matrice $m \times n$ a elementi in $R$. Allora esistono
+		unici (a meno di associati)
+		$d_1$, ..., $d_k \in R$ con $d_1 \mid d_2 \mid \cdots \mid d_k$ e
+		$k = \min\{m, n\}$
+		tali per cui esistano due basi $\basis$, $\basis'$ di $R^n$ e $R^m$
+		che soddisfano
+		l'identità\footnote{
+			La matrice $S'$ mostra in realtà il caso in cui $m > n$. Tuttavia la
+			struttura di $S'$ si può generalizzare facilmente per $m \leq n$.
+		}:
+		\[
+			S' := M^{\basis}_{\basis'}(f_S) = \begin{pmatrix}
+				d_1 & 0 & 0 & 0 & \dots & 0 \\
+				0 & d_2 & 0 & 0 & \dots & 0 \\
+				\vdots & \vdots & \ddots & \vdots & \dots & \vdots \\
+				0 & 0 & 0 & d_k & \dots & 0
+			\end{pmatrix},
+		\]
+		dove con $f_S$ si intende l'applicazione lineare indotta dalla matrice $S$.
+	\end{proposition}
+	
+	\begin{proof}[Dimostrazione dell'esistenza]
+		Le uniche operazioni consentite sulla matrice che consentono di
+		individuare una nuova coppia di basi opportune sono le stesse\footnote{
+			Si verifica facilmente che ogni tale operazione modifica una delle
+			due basi tramite le operazioni elementari di riordinamento e di somma
+			per un multiplo.
+		}
+		contemplate dall'algoritmo di eliminazione di Gauss eccetto per quella
+		di moltiplicazione di una riga (o di una colonna) per un elemento non invertibile
+		di $R$. Pertanto, si presenta la dimostrazione dell'esistenza della
+		forma normale di Smith come un algoritmo che permette di alterare la
+		matrice tramite le uniche operazioni consentite. \medskip
+		
+		
+		Se $S=0$, la tesi è già dimostrata. Altrimenti, si possono utilizzare le
+		operazioni consentite per far sì che si verifichi $s_{11} \neq 0$. Si
+		distinguono ora tre casi:
+		\begin{enumerate}[(i)]
+			\item $s_{11}$ non divide almeno un elemento di $S^1$,
+			\item $s_{11}$ non divide almeno un elemento di $S_1$,
+			\item $s_{11}$ divide tutti gli elementi di $S^1$ e $S_1$.
+		\end{enumerate}
+		
+		Se $s_{11}$ non divide almeno un elemento di $S^1$, detto $s_{i1}$,
+		si possono effettuare operazioni di riga per spostare $s_{i1}$
+		in $s_{21}$. Poiché $R$ è un PID, l'ideale $(s_{11}, s_{21})$ è monogenerato,
+		e dunque esistono $\alpha$, $\beta \in R$ tali per cui
+		$(s_{11}, s_{21}) = (\alpha s_{11} + \beta s_{21})$. Vale inoltre
+		che $(\alpha, \beta) = R$\footnote{
+			Infatti, se $d = \alpha s_{11} + \beta s_{21}$, vale che
+			$\frac{s_{11}}{d} \alpha + \frac{s_{21}}{d} \beta = 1$.
+		}, e dunque che esistono $\gamma$, $\delta \in R$
+		tali per cui $\gamma \alpha + \delta \beta = 1$. Si può
+		allora moltiplicare la matrice a sinistra per la matrice
+		invertibile\footnote{
+			Tale matrice è invertibile poiché unimodulare. Alternativamente, si
+			può fornire esplicitamente l'inverso $\SMatrix{ \gamma & -\beta \\ \delta & \alpha }$.
+		}:
+		\[ \Matrix{\alpha & \beta \\ -\delta & \gamma }, \]
+		opportunamente inserita al posto del blocco $(I_m)^{1,2}_{1,2}$ in $I_m$.
+		Si effettua un analogo ragionamento per il caso (ii), moltiplicando a destra
+		per la stessa matrice, opportunamente trasposta. Si continua a effettuare questo
+		tipo di moltiplicazioni fino a quando non si ricade nel caso (iii). Il caso
+		(iii) è sempre raggiungibile, dal momento che ad ogni operazione si sostituisce
+		$s_{11}$ con un suo divisore, creando una successione ascendente di ideali
+		$(a_1) \subseteq (a_2) \subseteq (a_3) \subseteq \cdots$ che, per la noetherianità
+		di $R$, deve stabilizzarsi. \medskip
+		
+		
+		Giunti nel caso (iii), si annullano i primi elementi di tutte le colonne
+		di $S$ eccetto per $S^1$, sottraendo un opportuno multiplo di $S^1$. Si
+		effettua poi la stessa cosa per le righe eccetto che per $S_1$. Se
+		$m=1$ o $n=1$, l'algoritmo termina.
+		Altrimenti si ottiene una matrice della forma:
+		\[ \Matrix{s_{11} & 0 \\ 0 & \tilde{S}}. \]
+		Se $s_{11}$ divide ora ogni elemento di $\tilde{S}$, si riapplica l'algoritmo
+		soltanto su $\tilde{S}$ (ogni operazione su $\tilde{S}$ può essere estesa a
+		un'operazione su $S$ che lascia l'elemento $s_{11}$ invariato. Se invece esiste
+		un elemento $s_{ij}$ non diviso da $s_{11}$, si somma la riga $S_i$ alla
+		riga $S_1$ (o la colonna $S^j$ alla colonna $S^1$) e si riapplica l'algoritmo.
+		Per le stesse motivazioni di prima, ad un passo dell'algoritmo $s_{11}$ dovrà dividere
+		ogni elemento di $\tilde{S}$. \medskip
+		
+		
+		Dopo aver impiegato con successo l'algoritmo, si otterrà una matrice nella
+		forma normale di Smith, dimostrando la tesi.
+	\end{proof}
+	
+	Pertanto esistono due basi $\basis$ e $\basis' = \{ \vv 1, \ldots, \vv n \}$
+	di $R^m$ e $R^n$ tali per cui $M^\basis_{\basis'}(f_S)$ assume la forma normale
+	di Smith. In particolare, vale che:
+	\[
+		\Im T = \langle d_1 \vv 1 \rangle \oplus \cdots \oplus \langle d_k \vv k \rangle \oplus \langle 0 \vv{k+1} \rangle \oplus \cdots \oplus \langle 0 \vv n \rangle.
+	\]
+
+
+	Sia allora $\iota : R^n \to R/(d_1) \times \cdots \times R/(d_k)  \times R \times \cdots \times R$ l'applicazione lineare determinata dalla relazione:
+	\[
+		a_1 \vv 1 + \ldots + a_n \vv n \xmapsto{\iota} ([a_1]_{d_1}, \ldots, [a_k]_{d_k}, a_{k+1}, \ldots, a_n).
+	\]
+	Chiaramente $\iota$ è surgettiva. Sia adesso $\v = a_1 \vv 1 + \ldots + a_n \vv n$
+	tale per cui $\iota(\v) = \vec 0$. Allora $d_1$ deve dividere $a_1$,
+	$d_2$ deve dividere $a_2$, e così fino ad $a_k$. Infine $a_{k+1} = \cdots = a_n = 0$.
+	Pertanto $\v$ dovrà necessariamente appartenere a $\Im T$; viceversa ogni elemento
+	di $\Im T$ appartiene a $\Ker \iota$, da cui $\Ker \iota = \Im T$. Allora,
+	per il primo teorema di isomorfismo, vale che:
+	
+	\begin{equation}
+		\label{eq:iota_omomorfismo}
+		R^n / \Im T \cong R^n / \Ker \iota \cong R/(d_1) \times \cdots \times R/(d_k) \times R \times \cdots \times R.
+	\end{equation} \vskip 0.1in
+	
+	Combinando allora le identità \eqref{eq:isomorfismo_M_T} e \eqref{eq:iota_omomorfismo},
+	si ottiene la tesi\footnote{
+		Si tiene presente dell'isomorfismo $R/(0) \cong R$.
+	}:
+	\[
+		M \cong R/(d_1) \times \cdots \times R/(d_k) \times R \times \cdots \times R.
+	\]
+	\hfill\ensuremath{\blacksquare}
+\end{document}
